@@ -1,0 +1,15 @@
+shapely==1.8.5.post1
+#av2
+torchsummary==1.5.1
+nuscenes-devkit==1.1.9
+packaging==23.1
+setuptools==59.5.0
+scikit-image==0.19.3
+grpcio==1.70.0
+llvmlite==0.31.0
+numpy==1.19.5
+matplotlib==3.5.2
+pandas==1.4.4
+yapf==0.40.1
+tensorboard==2.14.0
+plyfile==1.0.3
