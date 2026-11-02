@@ -145,3 +145,29 @@ dmypy.json
 .pyre/
 
 cluster.sh
+
+# Training outputs
+work_dirs/
+
+# Datasets
+data/
+
+# Model checkpoints
+*.pth
+*.pt
+*.ckpt
+
+# Large geospatial imagery
+*.tif
+*.tiff
+*.jp2
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# CUDA installer (large binary file)
+mmdetection3d/cuda_11.1.0_455.23.05_linux.run

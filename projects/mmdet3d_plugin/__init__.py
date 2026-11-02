@@ -11,3 +11,5 @@ from .models.opt.adamw import AdamW2
 from .bevformer import *
 from .satmap import *
 from .models.backbones.efficientnet import EfficientNet
+from .aerial_map import *
+from .satmap.detectors.aerial_satmap import AerialSatMap

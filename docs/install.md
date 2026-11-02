@@ -48,7 +48,7 @@ git clone https://github.com/hustvl/MapTR.git
 cd /path/to/SatMap/mmdetection3d
 python setup.py develop
 
-cd /path/to/SatMap/projects/mmdet3d_plugin/maptr/modules/ops/geometric_kernel_attn
+cd /path/to/SatMap/projects/mmdet3d_plugin/maptr/modules/ops/geometric_kernel_attn # should be satmap not maptr
 python setup.py build install
 
 ```

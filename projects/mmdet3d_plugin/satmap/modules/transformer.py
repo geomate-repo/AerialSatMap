@@ -322,7 +322,25 @@ class MapTRPerceptionTransformer(BaseModule):
                     otherwise None.
         """
 
-        if self.encoder and bev_embed is None:
+        # if self.encoder and bev_embed is None:
+        #     bev_embed = self.get_bev_features(
+        #         mlvl_feats,
+        #         lidar_feat,
+        #         bev_queries,
+        #         bev_h,
+        #         bev_w,
+        #         grid_length=grid_length,
+        #         bev_pos=bev_pos,
+        #         prev_bev=prev_bev,
+        #         **kwargs)  # bev_embed shape: bs, bev_h*bev_w, embed_dims
+        if bev_embed is None:
+
+            if self.encoder is None:
+                raise ValueError(
+                    "bev_embed must be provided when "
+                    "the BEV encoder is disabled."
+                )
+
             bev_embed = self.get_bev_features(
                 mlvl_feats,
                 lidar_feat,
@@ -332,7 +350,8 @@ class MapTRPerceptionTransformer(BaseModule):
                 grid_length=grid_length,
                 bev_pos=bev_pos,
                 prev_bev=prev_bev,
-                **kwargs)  # bev_embed shape: bs, bev_h*bev_w, embed_dims
+                **kwargs,
+            )
 
         # bs = mlvl_feats[0].size(0)
         bs = bev_embed.size(0)

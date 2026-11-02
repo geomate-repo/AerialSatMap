@@ -1,0 +1,58 @@
+2026-10-30 16:01:16,333 - mmdet - INFO - Start running, host: jerry@jerry, work_dir: /media/jerry/Data3/ldeloe/AerialSatMap/work_dirs/aerial_satmap
+2026-10-30 16:01:16,333 - mmdet - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(ABOVE_NORMAL) Fp16OptimizerHook                  
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) EvalHook                           
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) EvalHook                           
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) Fp16OptimizerHook                  
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) EvalHook                           
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_val_epoch:
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+2026-10-30 16:01:16,333 - mmdet - INFO - workflow: [('train', 1)], max: 10 epochs
+2026-10-30 16:01:16,335 - mmdet - INFO - Checkpoints will be saved to /media/jerry/Data3/ldeloe/AerialSatMap/work_dirs/aerial_satmap by HardDiskBackend.
+2026-10-30 16:01:42,138 - mmdet - INFO - Epoch [1][50/8313]	lr: 7.973e-05, eta: 11:50:59, time: 0.513, data_time: 0.065, memory: 9664, loss_cls: 1.1336, loss_bbox: 0.0000, loss_iou: 0.0000, loss_pts: 37.3319, loss_dir: 0.0928, d0.loss_cls: 1.4038, d0.loss_bbox: 0.0000, d0.loss_iou: 0.0000, d0.loss_pts: 39.4618, d0.loss_dir: 0.0928, d1.loss_cls: 1.2868, d1.loss_bbox: 0.0000, d1.loss_iou: 0.0000, d1.loss_pts: 37.7833, d1.loss_dir: 0.0924, d2.loss_cls: 1.2738, d2.loss_bbox: 0.0000, d2.loss_iou: 0.0000, d2.loss_pts: 37.0364, d2.loss_dir: 0.0924, d3.loss_cls: 1.1532, d3.loss_bbox: 0.0000, d3.loss_iou: 0.0000, d3.loss_pts: 36.8762, d3.loss_dir: 0.0922, d4.loss_cls: 1.1317, d4.loss_bbox: 0.0000, d4.loss_iou: 0.0000, d4.loss_pts: 37.0281, d4.loss_dir: 0.0925, loss: 233.4558, grad_norm: 141.1408

@@ -112,25 +112,58 @@ class NMSFreeCoder(BaseBBoxCoder):
                     break
                 thresh_mask = final_scores >= tmp_score
 
-        if self.post_center_range is not None:
-            self.post_center_range = torch.tensor(
-                self.post_center_range, device=scores.device)
-            mask = (final_box_preds[..., :3] >=
-                    self.post_center_range[:3]).all(1)
-            mask &= (final_box_preds[..., :3] <=
-                     self.post_center_range[3:]).all(1)
+        # if self.post_center_range is not None:
+        #     self.post_center_range = torch.tensor(
+        #         self.post_center_range, device=scores.device)
+        #     mask = (final_box_preds[..., :3] >=
+        #             self.post_center_range[:3]).all(1)
+        #     mask &= (final_box_preds[..., :3] <=
+        #              self.post_center_range[3:]).all(1)
 
-            if self.score_threshold:
+        #     if self.score_threshold:
+        #         mask &= thresh_mask
+
+        #     boxes3d = final_box_preds[mask]
+        #     scores = final_scores[mask]
+
+        #     labels = final_preds[mask]
+        #     predictions_dict = {
+        #         'bboxes': boxes3d,
+        #         'scores': scores,
+        #         'labels': labels
+        #     }
+
+        #### replaced to fix bbox issue
+        if self.post_center_range is not None:
+            post_center_range = torch.as_tensor(
+                self.post_center_range,
+                device=final_box_preds.device,
+                dtype=final_box_preds.dtype,
+            )
+
+            # Aerial mapping: filter using XY coordinates only.
+            # post_center_range is [xmin, ymin, zmin, xmax, ymax, zmax].
+            mask = (
+                final_box_preds[..., :2] >= post_center_range[:2]
+            ).all(dim=1)
+
+            mask &= (
+                final_box_preds[..., :2] <= post_center_range[3:5]
+            ).all(dim=1)
+
+            if self.score_threshold is not None:
                 mask &= thresh_mask
 
             boxes3d = final_box_preds[mask]
             scores = final_scores[mask]
-
+            pts = final_pts_preds[mask]
             labels = final_preds[mask]
+
             predictions_dict = {
-                'bboxes': boxes3d,
-                'scores': scores,
-                'labels': labels
+                "bboxes": boxes3d,
+                "scores": scores,
+                "labels": labels,
+                "pts": pts,
             }
 
         else:
@@ -232,15 +265,34 @@ class MapTRNMSFreeCoder(BaseBBoxCoder):
                     break
                 thresh_mask = final_scores >= tmp_score
 
-        if self.post_center_range is not None:
-            self.post_center_range = torch.tensor(
-                self.post_center_range, device=scores.device)
-            mask = (final_box_preds[..., :4] >=
-                    self.post_center_range[:4]).all(1)
-            mask &= (final_box_preds[..., :4] <=
-                     self.post_center_range[4:]).all(1)
+        # if self.post_center_range is not None:
+        #     self.post_center_range = torch.tensor(
+        #         self.post_center_range, device=scores.device)
+        #     mask = (final_box_preds[..., :4] >=
+        #             self.post_center_range[:4]).all(1)
+        #     mask &= (final_box_preds[..., :4] <=
+        #              self.post_center_range[4:]).all(1)
 
-            if self.score_threshold:
+        ##### added for aerialsatmap bug when changing bbox ####
+        if self.post_center_range is not None:
+            post_center_range = torch.as_tensor(
+                self.post_center_range,
+                device=final_box_preds.device,
+                dtype=final_box_preds.dtype,
+            )
+
+            # Aerial mapping: filter using the predicted X and Y coordinates.
+            mask = (
+                final_box_preds[..., :2] >= post_center_range[:2]
+            ).all(dim=1)
+
+            mask &= (
+                final_box_preds[..., :2] <= post_center_range[3:5]
+            ).all(dim=1)
+        ##### added for aerialsatmap bug when changing bbox ####
+
+            # if self.score_threshold:
+            if self.score_threshold is not None:
                 mask &= thresh_mask
 
             boxes3d = final_box_preds[mask]
